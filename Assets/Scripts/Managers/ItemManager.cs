@@ -29,10 +29,12 @@ public class ItemManager{
 			// TODO: obj(position) overlaps with walls
 			GameObject currentGround = GameObject.FindGameObjectWithTag("Ground");
 			Vector3 groundSize = currentGround.GetComponent<MeshCollider>().bounds.size;
+
+			float keepDistanceToWall = 0.9f;
 			Vector3 itemPosition = new Vector3(
-				Random.Range(-groundSize.x / 2, groundSize.x / 2),
+				Random.Range(-groundSize.x / 2, groundSize.x / 2) * keepDistanceToWall,
 				1,
-				Random.Range(-groundSize.z / 2, groundSize.z / 2));							
+				Random.Range(-groundSize.z / 2, groundSize.z / 2) * keepDistanceToWall);							
 			item.transform.position = itemPosition;
 		}
 	}
