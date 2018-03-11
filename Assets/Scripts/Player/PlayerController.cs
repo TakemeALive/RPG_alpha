@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public Rigidbody _rigidbody;
-	public float _speed = 10.0f;
+	public Rigidbody rigidbody;
+	public float speed = 10.0f;
 
 	void Start()
 	{
-		_rigidbody = GetComponent<Rigidbody>();		
+		rigidbody = GetComponent<Rigidbody>();		
 	}
 
 	void FixedUpdate()
 	{
-		if(_rigidbody.velocity.y <= 1.0f)
+		if(rigidbody.velocity.y <= 1.0f)
 		{
 			float moveHorizontal = Input.GetAxis("Horizontal");
 			float moveVertical = Input.GetAxis("Vertical");
 
-			Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-			_rigidbody.AddForce(movement * _speed);
+			// Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+			// movement *= Camera.main.transform.forward;
+			Vector3 movement = Camera.main.transform.TransformDirection(moveHorizontal, 0.0f, moveVertical);
+			rigidbody.AddForce(movement * speed);
 		}
 	}
 	private void OnTriggerEnter(Collider other) {
