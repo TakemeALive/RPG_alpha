@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour {
 
 	void LateUpdate()
 	{
+		//TODO:Camera could be behind of some other object that cannot see player(e.g. after the player is teleported)
 		currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw, 0), ref rotationSmoothVelocity, rotationSmoothTime);
 		transform.eulerAngles = currentRotation;
 		transform.position = player.transform.position - transform.forward * distance;
