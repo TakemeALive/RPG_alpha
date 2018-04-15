@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// This class is not be used anymore.
 public class PlayerController : MonoBehaviour {
 
 	public Rigidbody rigidbody;
