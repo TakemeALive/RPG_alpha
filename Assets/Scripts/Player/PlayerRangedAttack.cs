@@ -14,6 +14,7 @@ public class PlayerRangedAttack : MonoBehaviour {
 	int shootableMask;
 
 	ParticleSystem gunParticles;
+	ParticleSystem spellParticleOnEnemy;
 	AudioSource gunAudio;
 	Light gunLight;
 	float effectsDisplayTime = 0.2f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour {
 
-	static public bool isEnemyOnSpawning = false;
+	// static public bool isEnemyOnSpawning = true;
 
 	public PlayerHealth playerHealth;
 	public float spawnTime = 3f;
@@ -13,19 +13,19 @@ public class EnemyManager : MonoBehaviour {
 	
 	void Start()
 	{	
-		if(isEnemyOnSpawning){
+		// if(isEnemyOnSpawning){
 			InvokeRepeating("Spawn", spawnTime, spawnTime);
-			isEnemyOnSpawning = false;
-		}
+		// 	isEnemyOnSpawning = false;
+		// }
 		
 	}
 
 	void Update()
 	{
-		if(isEnemyOnSpawning){
-			InvokeRepeating("Spawn", spawnTime, spawnTime);
-			isEnemyOnSpawning = false;
-		}
+		// if(isEnemyOnSpawning){
+		// 	InvokeRepeating("Spawn", spawnTime, spawnTime);
+		// 	isEnemyOnSpawning = false;
+		// }
 	}
 
 	void Spawn()

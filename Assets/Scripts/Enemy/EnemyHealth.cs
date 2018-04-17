@@ -10,14 +10,19 @@ public class EnemyHealth : MonoBehaviour {
 	public float sinkSpeed = 2.5f;
 	public int scoreValue = 10;
 	public AudioClip deathClip;
+	public GameObject spell;
 
 	Animator anim;
 	AudioSource enemyAudio;
 	ParticleSystem hitParticles;
+	
 	CapsuleCollider capsuleCollider;
 	
 	bool isDead;
 	bool isSinking;
+
+	float spellPlayPeriod = 3f;
+    float timer;
 
 	void Awake()
 	{
@@ -27,11 +32,19 @@ public class EnemyHealth : MonoBehaviour {
 		capsuleCollider = GetComponent<CapsuleCollider>();
 
 		currentHealth = startingHealth; 
+
+		timer = 0f;
 	}
 
 	void Update()
 	{
-		if(isSinking) { transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime); }	
+		if(isSinking) { transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime); }
+		
+		timer += Time.deltaTime;
+		if(timer > spellPlayPeriod){
+			spell.SetActive(false);
+			timer = 0f;
+		}
 	}
 
 	public void TakeDamage(int amount, Vector3 hitPoint)
@@ -47,6 +60,12 @@ public class EnemyHealth : MonoBehaviour {
 
 		hitParticles.transform.position = hitPoint;
 		hitParticles.Play();
+
+		// TODO: Effect Audio will not be played in the second time(Bug).
+		// TODO: Effect might be too long for one shot.
+		timer = 0f;
+		spell.SetActive(false);
+		spell.SetActive(true);
 
 		if(currentHealth <= 0)
 		{ 
