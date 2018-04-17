@@ -87,19 +87,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			if(other.gameObject.CompareTag("Portal_A")){
 			// MainScene->PortalA to OrangeScene->PortalOrange
-				Teleport(player, GameObject.FindGameObjectWithTag("Portal_Orange"), SceneManager.GetSceneByName("OrangeScene"));
+				Teleport(player, GameObject.FindGameObjectWithTag("Portal_Orange"), "OrangeScene");
 				portalTag = "Portal_Orange";
 			}else if(other.gameObject.CompareTag("Portal_B")){
 			// MainScene->PortalB to BlueScene->PortalBlue
-				Teleport(player, GameObject.FindGameObjectWithTag("Portal_Blue"), SceneManager.GetSceneByName("BlueScene"));
+				Teleport(player, GameObject.FindGameObjectWithTag("Portal_Blue"),"BlueScene");
 				portalTag = "Portal_Blue";
 			}else if(other.gameObject.CompareTag("Portal_Orange")){
 			// OrangeScene->PortalOrange to MainScene->PortalA 
-				Teleport(player, GameObject.FindGameObjectWithTag("Portal_A"), SceneManager.GetSceneByName("MainScene"));
+				Teleport(player, GameObject.FindGameObjectWithTag("Portal_A"), "MainScene");
 				portalTag = "Portal_A";
 			}else if(other.gameObject.CompareTag("Portal_Blue")){
 			// BlueScene->PortalBlue to MainScene->PortalB 
-				Teleport(player, GameObject.FindGameObjectWithTag("Portal_B"), SceneManager.GetSceneByName("MainScene"));
+				Teleport(player, GameObject.FindGameObjectWithTag("Portal_B"), "MainScene");
 				portalTag = "Portal_B";
 			}
 		}
@@ -107,11 +107,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	}
 
     //TODO:Might be better to make a TeleportManager thing to manage all the items/player teleportation
-	private void Teleport(GameObject go, GameObject dest, Scene scene)
+	private void Teleport(GameObject go, GameObject dest, String sceneName)
 	{ // Teleport a GameObject(usually is player) to a destination
-		if(scene != null){
+        Scene scene = SceneManager.GetSceneByName(sceneName);
+		if(scene.isLoaded){
 			SceneManager.MoveGameObjectToScene(go, scene);
-		}
+        }else{
+            // Might need to use a SceneController to deal with the new loaded scene
+            // for optimizing memory management. 
+
+            // TODO: Cannot be teleport if the scene is not loaded the first time player entered the portal
+            // TODO: The baked light mapping is also a problem if we need SceneManager to load the scene
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+			Scene loadedScene = SceneManager.GetSceneByName(sceneName);
+            SceneManager.MoveGameObjectToScene(go, loadedScene);
+        }
 		player.transform.position = dest.transform.position;
 
 		// TODO:Might be better to detect the speed direction of the player with portal by Mathf.cos

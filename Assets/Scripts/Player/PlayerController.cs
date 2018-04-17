@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour {
 
 	void Start()
 	{
-		rigidbody = player.GetComponent<Rigidbody>();		
+		rigidbody = player.GetComponent<Rigidbody>();	
+		DontDestroyOnLoad(player);
 	}
 
 	void FixedUpdate()

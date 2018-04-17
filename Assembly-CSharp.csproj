@@ -112,6 +112,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerRangedAttack.cs" />
      <Compile Include="Assets\Scripts\Player\ThirdPersonCharacter.cs" />
      <Compile Include="Assets\Scripts\Player\ThirdPersonUserControl.cs" />
+     <Compile Include="Assets\Scripts\SceneController\SceneController.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Fog.shader" />
