@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour {
 	void Start()
 	{	
 		// if(isEnemyOnSpawning){
-			InvokeRepeating("Spawn", spawnTime, spawnTime);
+			// InvokeRepeating("Spawn", spawnTime, spawnTime);
 		// 	isEnemyOnSpawning = false;
 		// }
 		
